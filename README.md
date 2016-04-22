@@ -5,6 +5,7 @@ This is the Eclipse Plugin for the RISC-V GNU Toolchain
 ## Getting the software
 ### The easy way
 The archive directory contains the plug-in as an installable archive.
+
 1. Download the archive
 2. Start Eclipse
 3. menu Help - Install New Software
