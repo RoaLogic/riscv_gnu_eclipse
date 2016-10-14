@@ -1,6 +1,11 @@
 # riscv_gnu_eclipse
 
-This is the Eclipse Plugin for the RISC-V GNU Toolchain
+This is the Eclipse-Plugin for the RISC-V GNU Toolchain
+
+## Requirements
+Eclipse-CDT
+Tested with Eclipse Version: Mars.2 Release (4.5.2) on Linux (CentOS-6)
+
 
 ## Getting the software
 ### The easy way
@@ -19,3 +24,12 @@ The archive directory contains the plug-in as an installable archive.
 11. Click 'Next'
 12. Now proceed through the normal installation process
 13. Finally restart Eclipse
+
+
+### The hard way
+Download the code and build it ...
+
+
+
+## Releases
+14-oct-2016: Fixed issue #1
