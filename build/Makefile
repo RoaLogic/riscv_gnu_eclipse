@@ -1,3 +1,10 @@
+#
+# usage: make -B
+#
+# The -B ignores timestamps, thus forcing rebuild-all
+#
+
+
 # Eclipse workspace location.
 ECLIPSE_WORKSPACE := ..
 
