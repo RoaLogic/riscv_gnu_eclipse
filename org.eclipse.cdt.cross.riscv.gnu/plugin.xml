@@ -1519,7 +1519,6 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.link.category.other"
-               defaultValue="--specs=nsim.specs"
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.otherflags"
                name="Other flags"
                valueType="string">
