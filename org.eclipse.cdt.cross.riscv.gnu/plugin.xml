@@ -178,6 +178,43 @@
          </option>
          <option
                applicabilityCalculator="com.riscv.cdt.toolchain.riscv.RISCVApplicabilityCalculator"
+               id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi"
+               name="ABI (-mabi)"
+               valueType="enumerated">
+            <enumeratedOptionValue
+                  command="-mabi=ilp32"
+                  id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi.ilp32"
+                  isDefault="true"
+                  name="ilp32">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mabi=ilp32f"
+                  id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi.ilp32f"
+                  name="ilp32f">
+            </enumeratedOptionValue>
+             <enumeratedOptionValue
+                  command="-mabi=ilp32d"
+                  id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi.ilp32d"
+                  name="ilp32d">
+            </enumeratedOptionValue>        
+            <enumeratedOptionValue
+                  command="-mabi=lp64"
+                  id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi.lp64"
+                  name="lp64">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-mabi=lp64f"
+                  id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi.lp64f"
+                  name="lp64f">
+            </enumeratedOptionValue>
+             <enumeratedOptionValue
+                  command="-mabi=lp64d"
+                  id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi.lp64d"
+                  name="lp64d">
+            </enumeratedOptionValue>   
+         </option>       
+         <option
+               applicabilityCalculator="com.riscv.cdt.toolchain.riscv.RISCVApplicabilityCalculator"
                id="org.eclipse.cdt.cross.riscv.gnu.base.option.target.arch.rva"
                name="Atomic"
                valueType="boolean">
@@ -247,14 +284,15 @@
             </enumeratedOptionValue>
          </option>
          <option
+               command="-mfdiv"
                id="org.eclipse.cdt.cross.riscv.gnu.base.option.fdiv"
-               name="Hardware floating point DIV/SQRT (-mfdiv)"
+               name="Use hardware floating point DIV/SQRT (-mfdiv)"
                valueType="boolean">               
          </option>
          <option
-               command="-mlra"
-               id="org.eclipse.cdt.cross.riscv.gnu.base.option.lra"
-               name="Use LRA instead of reload (-mlra)"
+               command="-mdiv"
+               id="org.eclipse.cdt.cross.riscv.gnu.base.option.div"
+               name="Use hardware integer division (-mdiv)"
                valueType="boolean">               
          </option>
          <option
@@ -698,6 +736,31 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.optimization.fdiv"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.fdiv">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.optimization.div"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.div">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.optimization.memcpy"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.memcpy">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.optimization.plt"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.plt">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.optimization.saverestore"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.saverestore">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.optimization"
                command="-fpack-struct"
                defaultValue="false"
                id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.optimization.packstruct"
@@ -839,11 +902,6 @@
                category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.other"
                id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.misc.code_model"
                superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.code_model">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.other"
-               id="org.eclipse.cdt.cross.riscv.gnu.c.compiler.option.misc.fdiv"
-               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.fdiv">
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.c.compiler.category.other"
@@ -991,6 +1049,31 @@
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.optimization.level"
                name="Optimization level"
                superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.optimization.level">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.optimization.fdiv"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.fdiv">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.optimization.div"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.div">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.optimization.memcpy"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.memcpy">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.optimization.plt"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.plt">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.optimization"
+               id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.optimization.saverestore"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.saverestore">
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.optimization"
@@ -1151,11 +1234,6 @@
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.other"
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.misc.code_model"
                superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.code_model">
-         </option>
-         <option
-               category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.other"
-               id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.misc.fdiv"
-               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.fdiv">
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.other"
@@ -1926,6 +2004,12 @@
                name="Target"
                superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.target.processor">
          </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.linux.category.target"
+               id="org.eclipse.cdt.cross.riscv.gnu.linux.option.target.abi"
+               name="ABI"
+               superClass="org.eclipse.cdt.cross.riscv.gnu.base.option.target.abi">
+         </option>         
          <option category="org.eclipse.cdt.cross.riscv.gnu.linux.category.target"
                  id="org.eclipse.cdt.cross.riscv.gnu.linux.option.target.arch.rva"
                  isAbstract="false"

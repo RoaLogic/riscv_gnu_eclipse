@@ -101,7 +101,7 @@ public class RISCVOptionEnablementManager extends OptionEnablementManager {
                 } else {
                 	//disable specific options
                 	for (String option: DISABLE_WHEN_NO_RVF) {
-                		setEnabled(getToolChainSpecificOption(option),false);
+                        setEnabled(getToolChainSpecificOption(option),false);
                     }
                 }  
             }
@@ -110,12 +110,12 @@ public class RISCVOptionEnablementManager extends OptionEnablementManager {
                 if (rvdValue) {
                 	//enable options when RVF is selected
                     for (String option : DISABLE_WHEN_NO_RVD) {
-                        setEnabled(getToolChainSpecificOption(option), true);
+//                        setEnabled(getToolChainSpecificOption(option), true);
                     }
                 } else {
                 	//disable specific options
                 	for (String option: DISABLE_WHEN_NO_RVD) {
-                		setEnabled(getToolChainSpecificOption(option),false);
+//                		setEnabled(getToolChainSpecificOption(option),false);
                     }
                 }  
             }

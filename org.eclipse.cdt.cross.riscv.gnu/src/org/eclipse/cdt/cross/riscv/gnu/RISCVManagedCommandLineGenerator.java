@@ -45,16 +45,44 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
     public IManagedCommandLineInfo generateCommandLineInfo(ITool oTool, String sCommandName, String[] asFlags, String sOutputFlag, String sOutputPrefix, String sOutputName, String[] asInputResources, String sCommandLinePattern, boolean bFlag)
     {
       ArrayList<String> oList = new ArrayList<String>();
-      ArrayList<String> oList_gcc_options = new ArrayList<String>();
+      ArrayList<String> oList_compiler_options = new ArrayList<String>();
+      ArrayList<String> oList_assembler_options = new ArrayList<String>();
+      ArrayList<String> oList_linker_options = new ArrayList<String>();
+      
+      String sAssemblerWaOptions = "";
+      String sLinkerWlOptions = "";
+      
 
+      //Which Tool called me?
+      boolean bIsCompiler  = false;
+      boolean bIsAssembler = false;
+      boolean bIsLinker    = false;
+      
+      {
+        ITool oToolSuper = oTool;
+        while (oToolSuper.getSuperClass() != null) {
+          oToolSuper = oToolSuper.getSuperClass();
+        }
+        String sID = oToolSuper.getId();
+      
+
+        if (sID.indexOf(".compiler") > 0) {
+    	    bIsCompiler = true;
+        } else if (sID.indexOf(".assembler") > 0) {
+    	    bIsAssembler = true;
+        } else if (sID.indexOf(".linker") > 0) {
+    	    bIsLinker = true;
+        }
+      }
+      
+      
       //RISC-V Options
       String  sProcessor = null;
-      boolean hasRVA     = false;
-      boolean hasRVC     = false;
-      boolean hasRVM     = false;
-      boolean hasFPU     = false;
+      String  sABI       = null;
+
       boolean bFDIV      = false;
-      String  sArch      = "";
+      String sArch = "";
+      
    
       //Get Tool options
       IOption[] oToolOptions = oTool.getOptions();
@@ -93,8 +121,9 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
              bVal = false;
             }
 
-            if (bVal) {   
-            	if (sID.indexOf(".option.misc.fdiv") > 0) {
+            if (bVal) {
+            	//just an example ...
+            	if (sID.indexOf(".option.optimization.fdiv") > 0) {
                     bFDIV = true;
                 }
             }
@@ -117,14 +146,20 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
         IToolChain oToolChain = (IToolChain)oParent;
         IOption[] aoOptions = oToolChain.getOptions();
    
-        String sProcessorEndiannes = null;
-   
         String sSyntaxonly = null;   
         String sDebugLevel = null;   
         String sDebugFormat = null;   
         String sDebugOther = null;   
         String sDebugProf = null;   
         String sDebugGProf = null;
+        
+        boolean hasRVA     = false;
+        boolean hasRVC     = false;
+        boolean hasRVM     = false;
+        boolean hasRVF     = false;
+        boolean hasRVD     = false;
+        boolean hasRVQ     = false;
+        boolean isRVE      = false;
 
 
         for (int i = 0; i < aoOptions.length; i++) {
@@ -140,7 +175,6 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
                sVal = oOption.getStringValue();
              }
              catch (BuildException e) {
-               // yunluz comment String sVal;
                sVal = null;
              }
              String sEnumCommand;
@@ -148,14 +182,13 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
                sEnumCommand = oOption.getEnumCommand(sVal);
              }
              catch (BuildException e1) {
-               //yunluz String sEnumCommand;
                sEnumCommand = null;
              }
 
              if (sID.indexOf(".option.target.processor") > 0) {
                sProcessor = sEnumCommand;
-             } else if (sID.indexOf(".option.target.endiannes") > 0) {
-               sProcessorEndiannes = sEnumCommand;
+             } else if (sID.indexOf(".option.target.abi") > 0) {
+               sABI = sEnumCommand;
              } else if (sID.indexOf(".option.warnings.syntax") > 0) {
                sSyntaxonly = sEnumCommand;
              } else if (sID.indexOf(".option.debugging.level") > 0) {
@@ -172,31 +205,26 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
               bVal = oOption.getBooleanValue();
             }
             catch (BuildException e) {
-             //yunluz boolean bVal;
              bVal = false;
             }
 
             if (bVal) {   
                 if (sID.indexOf(".option.debugging.prof") > 0) {
                     sDebugProf = sCommand;
+                } else if (sID.indexOf(".option.target.arch.rvm") > 0 ) {
+                    hasRVM = true;                    
                 } else if (sID.indexOf(".option.target.arch.rva") > 0 ) {
-                    sArch = sArch.concat("A");
                     hasRVA = true;
+                } else if (sID.indexOf(".option.target.arch.rvf") > 0 ) {
+                    hasRVF = true;
+                } else if (sID.indexOf(".option.target.arch.rvd") > 0 ) {
+                	hasRVD = true;
+                } else if (sID.indexOf(".option.target.arch.rvq") > 0 ) {
+                	hasRVQ = true;                 
                 } else if (sID.indexOf(".option.target.arch.rvc") > 0 ) {
-                    sArch = sArch.concat("C");
                     hasRVC = true;
                 } else if (sID.indexOf(".option.target.arch.rve") > 0 ) {
-                    sArch = sArch.concat("E");
-                } else if (sID.indexOf(".option.target.arch.rvm") > 0 ) {
-                    sArch = sArch.concat("M");
-                    hasRVM = true;
-                } else if (sID.indexOf(".option.target.arch.rvf") > 0 ) {
-                    sArch = sArch.concat("F");
-                    hasFPU = true;
-                } else if (sID.indexOf(".option.target.arch.rvd") > 0 ) {
-                    sArch = sArch.concat("D");
-                } else if (sID.indexOf(".option.target.arch.rvq") > 0 ) {
-                    sArch = sArch.concat("Q");
+                    isRVE = true;
                 } else if (sID.indexOf(".option.debugging.gprof") > 0) {
                     sDebugGProf = sCommand;
                 }
@@ -204,8 +232,21 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
           }
         } //next i
         
-        if (sProcessorEndiannes != null && !sProcessorEndiannes.isEmpty())
-            oList_gcc_options.add(sProcessorEndiannes);
+        //create sArch string ... GCC expects specific order
+        if (hasRVM) sArch = sArch.concat("m");
+        if (hasRVA) sArch = sArch.concat("a");
+        if (hasRVF) {
+        	sArch = sArch.concat("f");
+            if (hasRVD) sArch = sArch.concat("d");
+            if (hasRVQ) sArch = sArch.concat("q");
+        }
+        if (hasRVC) sArch = sArch.concat("c");
+        if (isRVE ) sArch = sArch.concat("e");
+        
+        
+        //Create Tool options
+        if (sABI != null && !sABI.isEmpty())
+        	oList.add(sABI);
         if (sSyntaxonly != null && !sSyntaxonly.isEmpty())
             oList.add(sSyntaxonly);
         if (sDebugLevel != null && !sDebugLevel.isEmpty()) {
@@ -224,31 +265,30 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
       
       //Create RISC-V command line arguments
       if (sProcessor != null && !sProcessor.isEmpty()) {
-         oList.add(sProcessor);
          if (sProcessor.equals("-m64")) {
-           sArch = "-march=RV64I" + sArch;
+           sArch = "-march=rv64i" + sArch;
          } else {
-           sArch = "-march=RV32I" + sArch;
+           sArch = "-march=rv32i" + sArch;
          }
       }
-      oList_gcc_options.add(sArch);
+      oList.add(sArch);
+      sAssemblerWaOptions = sAssemblerWaOptions + "," + sArch;
 
-      if (hasRVA)
-         oList_gcc_options.add("-matomics");
-      if (hasRVC)
-         oList_gcc_options.add("-mrvc");
-      if (hasRVM)
-    	  oList_gcc_options.add("-mmuldiv");
-      if (hasFPU) {
-    	 oList_gcc_options.add("-mhard-float");
-    	 if (bFDIV)
-    		 oList_gcc_options.add("-mfdiv");
-      } else {
-    	 oList_gcc_options.add("-msoft-float");
-      }
+     
+      if (!sAssemblerWaOptions.contentEquals(""))
+    	  oList_assembler_options.add("-Wa"+sAssemblerWaOptions);
+      if (!sLinkerWlOptions.contentEquals(""))
+    	  oList_linker_options.add("-Wl"+sLinkerWlOptions);
+      
 
+      //Add options/parameters to command line
       oList.addAll(Arrays.asList(asFlags));
-      oList.addAll(oList_gcc_options);
+      if (bIsCompiler)
+          oList.addAll(oList_compiler_options);
+      if (bIsAssembler)
+    	  oList.addAll(oList_assembler_options);
+      if (bIsLinker)
+    	  oList.addAll(oList_linker_options);
 
       return super.generateCommandLineInfo(oTool, sCommandName,
                 (String[]) oList.toArray(new String[0]), sOutputFlag, sOutputPrefix, sOutputName,
