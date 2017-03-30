@@ -3,6 +3,8 @@
 #
 # The -B ignores timestamps, thus forcing rebuild-all
 #
+# Make sure to update ALL MANIFEST.MF files and site.xml
+# The versions must all match
 
 
 # Eclipse workspace location.
