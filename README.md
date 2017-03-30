@@ -18,7 +18,7 @@ The archive directory contains the plug-in as an installable archive.
 5. Click the 'Archive' button
 6. Select the downloaded archive
 7. Click 'Ok'
-8. Clock 'Ok'
+8. Click 'Ok'
 9. You should now see 'RISC-V GNU Tools Support'
 10. Select it ...
 11. Click 'Next'
@@ -33,5 +33,4 @@ Download the code and build it ...
 
 ## Releases
 14-oct-2016: Fixed issue #1
-
-28-mar-2017: Update for new toolchain and toolchain options
+30-mar-2017: Update for new toolchain and toolchain options
