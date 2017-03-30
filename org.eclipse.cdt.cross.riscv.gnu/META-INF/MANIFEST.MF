@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.cdt.core;bundle-version="5.0.2",
 Bundle-Vendor: RoaLogic BV
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: bin/
-Bundle-Version: 2016.02.0.qualifier
+Bundle-Version: 2017.01.0.qualifier
 Bundle-Name: RISC-V GNU Toolchain C/C++ Development Support
 Bundle-Activator: org.eclipse.cdt.cross.riscv.gnu.RISCVPlugin
 Bundle-ManifestVersion: 2
