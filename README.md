@@ -32,5 +32,5 @@ Download the code and build it ...
 
 
 ## Releases
-14-oct-2016: Fixed issue #1
-30-mar-2017: Update for new toolchain and toolchain options
+- 14-oct-2016: Fixed issue #1
+- 30-mar-2017: Update for new toolchain and toolchain options
