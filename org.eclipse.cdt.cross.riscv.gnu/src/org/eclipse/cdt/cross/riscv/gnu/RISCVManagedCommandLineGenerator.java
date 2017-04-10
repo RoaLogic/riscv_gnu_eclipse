@@ -57,6 +57,7 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
       boolean bIsCompiler  = false;
       boolean bIsAssembler = false;
       boolean bIsLinker    = false;
+
       
       {
         ITool oToolSuper = oTool;
@@ -160,6 +161,7 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
         boolean hasRVD     = false;
         boolean hasRVQ     = false;
         boolean isRVE      = false;
+        boolean hasSections = false;
 
 
         for (int i = 0; i < aoOptions.length; i++) {
@@ -186,7 +188,7 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
              }
 
              if (sID.indexOf(".option.target.processor") > 0) {
-               sProcessor = sEnumCommand;
+               sProcessor = sVal; //not sEnumCommand, no -m32 or -,64 anymore
              } else if (sID.indexOf(".option.target.abi") > 0) {
                sABI = sEnumCommand;
              } else if (sID.indexOf(".option.warnings.syntax") > 0) {
@@ -227,10 +229,21 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
                     isRVE = true;
                 } else if (sID.indexOf(".option.debugging.gprof") > 0) {
                     sDebugGProf = sCommand;
+/* These are not ToolChain options
+ * TODO determine how to query these
+                } else if (sID.indexOf(".option.optimization.functionsections") > 0) {
+                	hasSections = true;
+                } else if (sID.indexOf(".option.optimization.datasections") > 0) {
+                	hasSections = true;
+*/
                 }
             }
           }
         } //next i
+        
+        //Linker options
+//        if (hasSections) oList_linker_options.add("-gc-sections");
+        oList_linker_options.add("-Wl,-gc-sections");
         
         //create sArch string ... GCC expects specific order
         if (hasRVM) sArch = sArch.concat("m");
@@ -265,7 +278,7 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
       
       //Create RISC-V command line arguments
       if (sProcessor != null && !sProcessor.isEmpty()) {
-         if (sProcessor.equals("-m64")) {
+         if (sProcessor.contains("64")) {
            sArch = "-march=rv64i" + sArch;
          } else {
            sArch = "-march=rv32i" + sArch;
