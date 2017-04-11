@@ -1389,8 +1389,8 @@
                id="org.eclipse.cdt.cross.riscv.gnu.c.link.option.libs"
                name="Libraries (-l)"
                valueType="libs">
-               <listOptionValue value="-lc" />
-               <listOptionValue value="-lgcc" />
+               <listOptionValue value="c" />
+               <listOptionValue value="gcc" />
          </option>
          <option
                browseType="directory"
@@ -1560,8 +1560,8 @@
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.libs"
                name="Libraries (-l)"
                valueType="libs">
-               <listOptionValue value="-lc" />
-               <listOptionValue value="-lgcc" />
+               <listOptionValue value="c" />
+               <listOptionValue value="gcc" />
          </option>
          <option
                browseType="directory"
