@@ -243,7 +243,7 @@ public class RISCVManagedCommandLineGenerator extends ManagedCommandLineGenerato
         
         //Linker options
 //        if (hasSections) oList_linker_options.add("-gc-sections");
-        oList_linker_options.add("-Wl,-gc-sections");
+//        oList_linker_options.add("-Wl,-gc-sections");
         
         //create sArch string ... GCC expects specific order
         if (hasRVM) sArch = sArch.concat("m");
