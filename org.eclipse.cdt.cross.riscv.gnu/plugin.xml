@@ -437,17 +437,17 @@
                valueType="boolean">
          </option>
          <option
-               command="-Xlinker --cref"
+               command="-Wl,--cref"
                defaultValue="false"
                id="org.eclipse.cdt.cross.riscv.gnu.base.option.other.cref"
-               name="Cross Reference (-Xlinker --cref)"
+               name="Cross Reference (-Wl,--cref)"
                valueType="boolean">
          </option>
          <option
-               command="-Xlinker --print-map"
+               command="-Wl,--print-map"
                defaultValue="false"
                id="org.eclipse.cdt.cross.riscv.gnu.base.option.other.printmap"
-               name="Print link map (-Xlinker --print-map)"
+               name="Print link map (-Wl,--print-map)"
                valueType="boolean">
          </option>
          <option
@@ -1363,10 +1363,27 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.c.link.category.general"
+               tip="Only search library directories explicitly specified"
                command="-nostdlib"
                defaultValue="true"
                id="org.eclipse.cdt.cross.riscv.gnu.c.link.option.nostdlibs"
                name="No startup or default libs (-nostdlib)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.c.link.category.general"
+               command="-Wl,--gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.riscv.gnu.c.link.option.csections"
+               name="Remove unused sections (-gc-sections)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.c.link.category.general"
+               command="-Wl,--print-gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.riscv.gnu.c.link.option.printcsections"
+               name="Print unused sections (-print-gc-sections)"
                valueType="boolean">
          </option>
          <option
@@ -1389,8 +1406,8 @@
                id="org.eclipse.cdt.cross.riscv.gnu.c.link.option.libs"
                name="Libraries (-l)"
                valueType="libs">
-               <listOptionValue value="c" />
-               <listOptionValue value="gcc" />
+<!--               <listOptionValue value="c" />
+               <listOptionValue value="gcc" /> -->
          </option>
          <option
                browseType="directory"
@@ -1407,9 +1424,9 @@
          </optionCategory>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.c.link.category.other"
-               command="-Xlinker ${VALUE}"
+               command="-Wl,${VALUE}"
                id="org.eclipse.cdt.cross.riscv.gnu.c.link.option.ldflags"
-               name="Linker flags (-Xlinker [option])"
+               name="Linker flags (-Wl,[option])"
                valueType="stringList">
          </option>
          <option
@@ -1436,10 +1453,10 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.c.link.category.other"
-               command="-v"
+               command="--verbose"
                defaultValue="false"
                id="org.eclipse.cdt.cross.riscv.gnu.c.linker.option.other.verbose"
-               name="Verbose (-v)"
+               name="Verbose (--verbose)"
                valueType="boolean">
          </option>
          <option
@@ -1542,6 +1559,22 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.link.category.general"
+               command="-Wl,--gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.csections"
+               name="Remove unused sections (-gc-sections)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.cpp.link.category.general"
+               command="-Wl,--print-gc-sections"
+               defaultValue="false"
+               id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.printcsections"
+               name="Print unused sections (-print-gc-sections)"
+               valueType="boolean">
+         </option>
+         <option
+               category="org.eclipse.cdt.cross.riscv.gnu.cpp.link.category.general"
                command="-s"
                defaultValue="false"
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.strip"
@@ -1560,8 +1593,8 @@
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.libs"
                name="Libraries (-l)"
                valueType="libs">
-               <listOptionValue value="c" />
-               <listOptionValue value="gcc" />
+<!--               <listOptionValue value="c" />
+               <listOptionValue value="gcc" /> -->
          </option>
          <option
                browseType="directory"
@@ -1578,9 +1611,9 @@
          </optionCategory>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.link.category.other"
-               command="-Xlinker ${VALUE}"
+               command="-Wl,${VALUE}"
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.ldflags"
-               name="Linker flags (-Xlinker [option])"
+               name="Linker flags (-Wl,[option])"
                valueType="stringList">
          </option>
          <option
