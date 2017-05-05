@@ -1373,7 +1373,7 @@
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.c.link.category.general"
                command="-Wl,--gc-sections"
-               defaultValue="false"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.riscv.gnu.c.link.option.csections"
                name="Remove unused sections (-gc-sections)"
                valueType="boolean">
@@ -1560,7 +1560,7 @@
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.link.category.general"
                command="-Wl,--gc-sections"
-               defaultValue="false"
+               defaultValue="true"
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.csections"
                name="Remove unused sections (-gc-sections)"
                valueType="boolean">
