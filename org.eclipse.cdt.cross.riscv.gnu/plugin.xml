@@ -1551,6 +1551,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.link.category.general"
+               tip="Only search library directories explicitly specified"
                command="-nostdlib"
                defaultValue="true"
                id="org.eclipse.cdt.cross.riscv.gnu.cpp.link.option.nostdlibs"
