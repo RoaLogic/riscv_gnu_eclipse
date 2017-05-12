@@ -1871,7 +1871,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.createflash.general"
-               command="-j .text"
+               command="-j .text*"
                id="org.eclipse.cdt.cross.riscv.gnu.createflash.general.text"
                isAbstract="false"
                name="Section: -j .text"
@@ -1880,7 +1880,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.createflash.general"
-               command="-j .data"
+               command="-j .data*"
                id="org.eclipse.cdt.cross.riscv.gnu.createflash.general.data"
                isAbstract="false"
                name="Section: -j .data"
@@ -1889,7 +1889,7 @@
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.createflash.general"
-               command="-j .tohost"
+               command="-j .tohost*"
                id="org.eclipse.cdt.cross.riscv.gnu.createflash.general.tohost"
                isAbstract="false"
                name="Section: -j .tohost"
