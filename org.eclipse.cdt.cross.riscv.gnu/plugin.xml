@@ -1241,6 +1241,26 @@
                   id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.misc.std.gnucpp0x"
                   name="ISO 2009 C++ with GNU Extensions (-std=gnu++0x)">
             </enumeratedOptionValue>
+                        <enumeratedOptionValue
+                  command="-std=c++0x"
+                  id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.misc.std.cpp11"
+                  name="ISO 2011 C++ (-std=c++11)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-std=gnu++11"
+                  id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.misc.std.gnucpp11"
+                  name="ISO 2011 C++ with GNU Extensions (-std=gnu++11)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-std=c++14"
+                  id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.misc.std.cpp14"
+                  name="ISO 2014 C++ (-std=c++14)">
+            </enumeratedOptionValue>
+            <enumeratedOptionValue
+                  command="-std=gnu++14"
+                  id="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.option.misc.std.gnucpp14"
+                  name="ISO 2014 C++ with GNU Extensions (-std=gnu++14)">
+            </enumeratedOptionValue>
          </option>
          <option
                category="org.eclipse.cdt.cross.riscv.gnu.cpp.compiler.category.other"
